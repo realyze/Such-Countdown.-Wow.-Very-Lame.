@@ -1,13 +1,14 @@
 request = require 'superagent'
-lights = require './red'
+#lights = require './red'
 oc = require 'onecolor'
 Q = require 'q'
 async = require 'async'
+primality = require 'primality'
 
 # Stupidly deep clone `obj`.
 clone = (obj) -> JSON.parse JSON.stringify obj
 
-originalLights = clone lights
+originalLights = lights: ('#FF0000' for i in [0..49])
 
 url = "http://192.168.23.254/iotas/0.1/device/moorescloud.holiday/localhost/setlights"
 
@@ -75,6 +76,9 @@ explode = ->
 
 countdown = (iterations) ->
   async.whilst ->
+    if primality(iterations)
+      iterations -= 1
+    console.log iterations
     iterations-- > 0
   ,  (fn) ->
     setTimeout ->
@@ -85,4 +89,4 @@ countdown = (iterations) ->
     setTimeout (-> explode()), 1000
     console.log 'done!'
 
-countdown(7)
+countdown(20)

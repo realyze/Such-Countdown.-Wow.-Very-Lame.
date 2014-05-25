@@ -9,9 +9,10 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "async": "*",
     "onecolor": "*",
+    "primality": "^1.6.1",
     "q": "*",
-    "superagent": "*",
-    "async": "*"
+    "superagent": "*"
   }
 }
