@@ -75,6 +75,7 @@ explode = ->
     console.log 'done!'
 
 countdown = (iterations) ->
+  originalIteratons = iterations
   async.whilst ->
     if primality(iterations)
       iterations -= 1
@@ -86,7 +87,9 @@ countdown = (iterations) ->
       fn()
     , 1000
   , ->
+    if Math.random() > 0.5
+      return countdown(originalIteratons)
     setTimeout (-> explode()), 1000
     console.log 'done!'
 
-countdown(20)
+countdown(12)
